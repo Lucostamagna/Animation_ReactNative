@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Bnt } from './Components/Bnt';
 
 export default function App() {
+  
   return (
     <View style={styles.container}>
       <Text>Animations</Text>

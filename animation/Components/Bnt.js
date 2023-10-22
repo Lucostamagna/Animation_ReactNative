@@ -1,9 +1,29 @@
-import {Animated,Text,TouchableHighlight, StyleSheet, PlatformColor} from "react-native"
+import {Animated,Text,TouchableHighlight, StyleSheet, } from "react-native"
 
 export const Bnt = ({title}) => {
+
+const animatedValue = new Animated.Value(1);
+const AnimtedStyle={
+    transform: [{scale:animatedValue}]
+}
+function OnpressIn(){
+    Animated.spring(animatedValue, {
+    toValue:0.7,
+    useNativeDriver:true
+  }).start
+}
+function OnpressOut(){
+    Animated.spring(animatedValue, {
+    toValue:1,
+    useNativeDriver:true
+  }).start
+}
+
   return (
-    <Animated.View style={styles.container}>
-        <TouchableHighlight style={styles.btn}>
+    <Animated.View style={[styles.container,AnimtedStyle]} >
+        <TouchableHighlight style={styles.btn}
+    onPressIn={OnpressIn}
+    onPressOut={OnpressOut}>
             <Text styles={styles.text}>{title}</Text>
 
         </TouchableHighlight>
