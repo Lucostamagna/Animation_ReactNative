@@ -7,7 +7,12 @@ const Sequence = ({ children }) => {
   Animated.loop(
     Animated.sequence([
       Animated.timing(animatedValue, {
-        toValue: 0.8,
+        toValue: 0.5,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+      Animated.timing(animatedValue, {
+        toValue: 1.5,
         duration: 500,
         useNativeDriver: true,
       }),
