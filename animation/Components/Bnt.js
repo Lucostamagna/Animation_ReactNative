@@ -8,25 +8,28 @@ const AnimtedStyle={
 }
 function OnpressIn(){
     Animated.spring(animatedValue, {
-    toValue:0.7,
-    useNativeDriver:true
+    toValue:0.96,
+    useNativeDriver:true,
+    speed:500
   }).start
 }
 function OnpressOut(){
     Animated.spring(animatedValue, {
     toValue:1,
-    useNativeDriver:true
+    useNativeDriver:true,
+    speed:500
   }).start
 }
 
   return (
     <Animated.View style={[styles.container,AnimtedStyle]} >
-        <TouchableHighlight style={styles.btn}
+    <TouchableHighlight style={styles.btn}
     onPressIn={OnpressIn}
-    onPressOut={OnpressOut}>
-            <Text styles={styles.text}>{title}</Text>
+    onPressOut={OnpressOut}
+    underlayColor={'white'}>
+    <Text styles={styles.text}>{title}</Text>
 
-        </TouchableHighlight>
+    </TouchableHighlight>
     </Animated.View>
   )
 }
@@ -58,7 +61,6 @@ const styles =StyleSheet.create({
         elevation:5
     },
     text:{
-        color:'white',
-        fontSize:20
+        
     }
 })

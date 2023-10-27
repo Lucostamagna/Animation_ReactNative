@@ -6,7 +6,7 @@ export default function App() {
   
   return (
     <View style={styles.container}>
-      <Text>Animations</Text>
+      <Text style={styles.text} >ANIMATIONS</Text>
       
       <Bnt title={"Press me"} />
     </View>
@@ -20,4 +20,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  text:{
+  fontSize:20,
+  marginBottom:'2%',
+  
+  }
 });
