@@ -9,9 +9,9 @@ export default function App() {
       <Text style={styles.text}>ANIMATIONS</Text>
 
       {/* <Bnt title={"Press me"} /> */}
-      <Sequence>
+      {/* <Sequence>
         <FontAwesome name="bell" size={50} color="gold" />
-      </Sequence>
+      </Sequence> */}
     </View>
   );
 }
