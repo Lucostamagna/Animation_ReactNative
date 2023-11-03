@@ -5,6 +5,9 @@ import Animated, {
   Easing,
   useAnimatedStyle,
   withSpring,
+  withSequence,
+  withDelay,
+  withRepeat,
 } from "react-native-reanimated";
 import React from "react";
 import { Button, SafeAreaView, ScrollView } from "react-native";
@@ -47,7 +50,7 @@ function Box() {
     return {
       transform: [
         {
-          translateX: withSpring(offset.value * 215, {
+          translateX: withSpring(offset.value * 255, {
             damping: 40,
             stiffness: 90,
           }),
@@ -92,6 +95,17 @@ const animatedStyle= useAnimatedStyle(()=>{
     ]}
     
     />
+    <Button
+    title="move"
+    onPress={()=>
+    rotation.value=withSequence(
+      withTiming(-10, { duration:20}),
+      withRepeat(withTiming(85, {duration:115})),
+      withTiming(0, {duration:50})
+    )
+    
+    }
+    />
     </>
   )
 }
@@ -100,8 +114,9 @@ const ReanimatedExamples = () => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <SharedValue />
+        {/* <SharedValue /> */}
         <Box />
+        <Wooble/>
       </ScrollView>
     </SafeAreaView>
   );
