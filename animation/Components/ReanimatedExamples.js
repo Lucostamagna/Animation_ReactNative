@@ -11,10 +11,10 @@ import Animated, {
 } from "react-native-reanimated";
 import React from "react";
 import { Button, SafeAreaView, ScrollView } from "react-native";
+import { PanGesture } from "react-native-gesture-handler";
 
 function SharedValue() {
   const randomWidth = useSharedValue(10);
-
   const config = {
     duration: 500,
     easing: Easing.bezier(0.5, 0.01, 0, 1),
@@ -76,7 +76,6 @@ function Box() {
 
 function Wooble (){
 const rotation = useSharedValue(0);
-
 const animatedStyle= useAnimatedStyle(()=>{
   return{
     transform:[{rotateZ: `${rotation.value}deg`}]
@@ -84,7 +83,6 @@ const animatedStyle= useAnimatedStyle(()=>{
 
 })
 
- 
   return(
     <>
     <Animated.View
@@ -100,8 +98,8 @@ const animatedStyle= useAnimatedStyle(()=>{
     onPress={()=>
     rotation.value=withSequence(
       withTiming(-10, { duration:20}),
-      withRepeat(withTiming(85, {duration:115})),
-      withTiming(0, {duration:50})
+      withRepeat(withTiming(25, {duration:100}),6,true),
+      withTiming(0, {duration:60})
     )
     
     }
