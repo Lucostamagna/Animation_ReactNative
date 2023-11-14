@@ -1,4 +1,6 @@
 //shared value
+import { PanGestureHandler } from "react-native-gesture-handler";
+import React from "react";
 import Animated, {
   useSharedValue,
   withTiming,
@@ -8,10 +10,12 @@ import Animated, {
   withSequence,
   withDelay,
   withRepeat,
+  useAnimatedGestureHandler,
 } from "react-native-reanimated";
-import React from "react";
+
+
 import { Button, SafeAreaView, ScrollView } from "react-native";
-import { PanGesture } from "react-native-gesture-handler";
+
 
 function SharedValue() {
   const randomWidth = useSharedValue(10);
@@ -108,14 +112,63 @@ const animatedStyle= useAnimatedStyle(()=>{
   )
 }
 
+const Events = () => {
+const startingposition=100;
+const x= useSharedValue(startingposition);
+const y=useSharedValue(startingposition);
+
+const pressed=useSharedValue(false);
+
+const eventHandler = useAnimatedGestureHandler({
+  onStart:(event,ctx)=>{
+    pressed.value=true;
+    ctx.startX = x.value;
+  ctx.startY = y.value;
+  },
+  onActive: (event,ctx)=>{
+    x.value = ctx.startX +event.translationX;
+    y.value = ctx.startY +event.translationY;
+  },
+  onEnd:(event,ctx)=>{
+    pressed.value = false
+  }
+});
+
+const stylesuas = useAnimatedStyle(()=>{
+  return {
+    backgroundColor: pressed.value ? "red" : "gold",
+    transform:[{translateX:x.value}, {translationY: x.value}]
+  }
+});
+
+
+return (
+  <>
+  <PanGestureHandler onGestureEvent={eventHandler}>
+    <Animated.View
+    style={[
+      {width: 100, height: 100, backgroundColor: "purple"},
+      stylesuas
+      
+    ]}/>
+  </PanGestureHandler>
+  </>
+)
+
+}
+
+
 const ReanimatedExamples = () => {
   return (
     <SafeAreaView>
+       <Events/>
       <ScrollView>
         {/* <SharedValue /> */}
         <Box />
+       
         <Wooble/>
       </ScrollView>
+     
     </SafeAreaView>
   );
 };
