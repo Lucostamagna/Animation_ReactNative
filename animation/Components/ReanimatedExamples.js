@@ -14,7 +14,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 
-import { Button, SafeAreaView, ScrollView } from "react-native";
+import { Button, SafeAreaView, ScrollView, StyleSheet, TouchableOpacity,Text } from "react-native";
 
 
 function SharedValue() {
@@ -66,14 +66,15 @@ function Box() {
     <>
       <Animated.View
         style={[
-          { width: 100, height: 100, backgroundColor: "purple" },
+          { width: 150, height: 150, backgroundColor: "purple", borderRadius:10, marginBottom:'5%' },
           animatedStyles,
         ]}
       />
-      <Button
-        title="Move"
-        onPress={() => (offset.value = withSpring(Math.random()))}
-      />
+      <TouchableOpacity onPress={() => (offset.value = withSpring(Math.random()))}
+      style={styles.button}>
+        <Text style={{color:'black', fontWeight:'700'}}> MOVE</Text> 
+      </TouchableOpacity>
+      
     </>
   );
 }
@@ -92,22 +93,27 @@ const animatedStyle= useAnimatedStyle(()=>{
     <Animated.View
     style= 
     {[
-      { width: 100, height: 100, backgroundColor: "purple" },
+      { width: 150, height: 150, backgroundColor: "tomato", borderRadius: 10, marginBottom:'5%', marginTop:'10%', marginLeft:'25%'},
       animatedStyle,
     ]}
     
     />
-    <Button
-    title="move"
-    onPress={()=>
-    rotation.value=withSequence(
-      withTiming(-10, { duration:20}),
-      withRepeat(withTiming(25, {duration:100}),6,true),
-      withTiming(0, {duration:60})
-    )
+    <TouchableOpacity
+    style={styles.button}
+     onPress={()=>
+      rotation.value=withSequence(
+        withTiming(-10, { duration:20}),
+        withRepeat(withTiming(25, {duration:100}),6,true),
+        withTiming(0, {duration:60})
+      )
+      
+      }>
+        <Text style={{color:'black', fontWeight:'700'}}> MOVE</Text>
+      </TouchableOpacity>
     
-    }
-    />
+    
+   
+   
     </>
   )
 }
@@ -160,17 +166,33 @@ return (
 
 const ReanimatedExamples = () => {
   return (
-    <SafeAreaView>
-       <Events/>
+    <SafeAreaView style={{flex: 1, marginTop:'40%'}}>
       <ScrollView>
-        {/* <SharedValue /> */}
-        <Box />
-       
+        <Box/>
         <Wooble/>
       </ScrollView>
-     
     </SafeAreaView>
   );
 };
+
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: '#FAEBD7', 
+    width:'60%',
+    height:'10%',
+    marginLeft:'20%',
+    paddingVertical: 15, 
+    paddingHorizontal: 50, 
+    borderRadius: 8, 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.2,
+    shadowRadius: 2, 
+  }
+})
 
 export default ReanimatedExamples;
